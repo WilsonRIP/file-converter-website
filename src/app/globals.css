@@ -1,26 +1,251 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css'; /* Assuming this is a valid plugin import */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'flowers-kingdom';
+  src: url('/fonts/Flowers%20Kingdom.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
+@font-face {
+  font-family: 'Arista Pro';
+  src: url('/fonts/Arista-Pro-Bold-trial.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Orange Juice 2.0';
+  src: url('/fonts/OrangeJuice2.0.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Custom variant - Use with caution, Tailwind's dark: variant is standard */
+@custom-variant dark (&:is(.dark *));
+
+/* Standard shadcn/ui variables (using oklch) */
+:root {
+  /* Font families */
+  --font-primary:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-secondary: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+
+  /* Spacing units (use like: margin: var(--space-4)) */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+
+  /* Border Radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Transition Durations */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+
+  /* Box Shadows (adjust based on theme if needed) */
+  /* Define a default shadow color for light mode */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Example light shadow */
+
+  --shadow-sm: 0 1px 2px 0 var(--shadow-color);
+  --shadow-md:
+    0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+  --shadow-lg:
+    0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+  --shadow-xl:
+    0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+
+  /* shadcn/ui default light theme variables */
+  --radius: 0.625rem;
+  --background: oklch(1 0 0); /* White */
+  --foreground: oklch(0.145 0 0); /* Near Black */
+  --card: oklch(1 0 0); /* White */
+  --card-foreground: oklch(0.145 0 0); /* Near Black */
+  --popover: oklch(1 0 0); /* White */
+  --popover-foreground: oklch(0.145 0 0); /* Near Black */
+  --primary: oklch(0.205 0 0); /* Dark Gray - Adjust if needed */
+  --primary-foreground: oklch(0.985 0 0); /* Near White */
+  --secondary: oklch(0.97 0 0); /* Light Gray */
+  --secondary-foreground: oklch(0.205 0 0); /* Dark Gray */
+  --muted: oklch(0.97 0 0); /* Light Gray */
+  --muted-foreground: oklch(0.556 0 0); /* Medium Gray */
+  --accent: oklch(0.97 0 0); /* Light Gray */
+  --accent-foreground: oklch(0.205 0 0); /* Dark Gray */
+  --destructive: oklch(0.577 0.245 27.325); /* Red */
+  --border: oklch(0.922 0 0); /* Gray */
+  --input: oklch(0.922 0 0); /* Gray */
+  --ring: oklch(0.708 0 0); /* Gray */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  /* Define a default shadow color for dark mode */
+  --shadow-color: rgba(0, 0, 0, 0.4); /* Example dark shadow */
+
+  /* shadcn/ui default dark theme variables */
+  --background: oklch(0.145 0 0); /* Near Black */
+  --foreground: oklch(0.985 0 0); /* Near White */
+  --card: oklch(0.205 0 0); /* Dark Gray */
+  --card-foreground: oklch(0.985 0 0); /* Near White */
+  --popover: oklch(0.205 0 0); /* Dark Gray */
+  --popover-foreground: oklch(0.985 0 0); /* Near White */
+  --primary: oklch(0.922 0 0); /* Light Gray - Adjust if needed */
+  --primary-foreground: oklch(0.205 0 0); /* Dark Gray */
+  --secondary: oklch(0.269 0 0); /* Darker Gray */
+  --secondary-foreground: oklch(0.985 0 0); /* Near White */
+  --muted: oklch(0.269 0 0); /* Darker Gray */
+  --muted-foreground: oklch(0.708 0 0); /* Medium Gray */
+  --accent: oklch(0.269 0 0); /* Darker Gray */
+  --accent-foreground: oklch(0.985 0 0); /* Near White */
+  --destructive: oklch(0.704 0.191 22.216); /* Red */
+  --border: oklch(1 0 0 / 10%); /* Transparent White */
+  --input: oklch(1 0 0 / 15%); /* Transparent White */
+  --ring: oklch(0.556 0 0); /* Medium Gray */
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/*
+  This @theme inline block appears specific to a framework
+  or build process that maps CSS variables to a theme object.
+  Ensure the variables here match the ones defined in :root and .dark.
+*/
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(
+    --font-geist-sans
+  ); /* Assuming --font-geist-sans is defined elsewhere or provided by the framework */
+  --font-mono: var(
+    --font-geist-mono
+  ); /* Assuming --font-geist-mono is defined elsewhere or provided by the framework */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  /* Adjust radius mapping to match Shadcn/ui convention */
+  --radius: var(
+    --radius-lg
+  ); /* Map the main --radius to the --radius-lg variable */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  /* Removed the calc() as it's less standard for the primary --radius variable */
+  /* --radius-sm: calc(var(--radius) - 4px); */
+  /* --radius-md: calc(var(--radius) - 2px); */
+  /* --radius-lg: var(--radius); */
+  /* --radius-xl: calc(var(--radius) + 4px); */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--foreground); /* Use foreground variable */
+  font-family: var(--font-primary); /* Apply primary font */
+  transition:
+    background-color var(--transition-normal) ease,
+    color var(--transition-normal) ease;
 }
+
+/* Screen Reader Only - for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Common transition */
+.transition-all-normal {
+  transition: all var(--transition-normal) ease;
+}
+
+/* Base styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    /* Applying background and text color from theme variables */
+    @apply bg-background text-foreground;
+  }
+}
+
+/*
+  Custom Component Styles and commented-out theme classes have been removed
+  as requested by the user context (reversion).
+  If you need specific custom classes back, they should be redefined
+  using the standard shadcn/ui variable names (--card, --foreground, etc.).
+*/
